@@ -2,7 +2,7 @@ resource "google_compute_instance" "backend" {
   name         = "my-frontend-instance"
   machine_type = "n1-standard-1"
   zone         = "us-west1-a"
-  project      = "${var.app_project}"
+  project      = var.project
 
   tags = ["backend"]
 
@@ -13,6 +13,6 @@ resource "google_compute_instance" "backend" {
   }
 
   network_interface {
-    subnetwork = "${data.terraform_remote_state.networking-dev.app_subnet}"
+    //subnetwork = data.terraform_remote_state.networking-dev.app_subnet
   }
 }

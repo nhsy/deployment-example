@@ -1,1 +1,1 @@
-app_project="gcp-foundation-shared-host"
+project = "nhsy-0002"

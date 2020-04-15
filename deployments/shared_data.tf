@@ -1,3 +1,4 @@
+/*
 data "terraform_remote_state" "networking-dev" {
   backend = "gcs"
 
@@ -7,3 +8,4 @@ data "terraform_remote_state" "networking-dev" {
     project = "gcp-foundation-shared-devops"
   }
 }
+*/

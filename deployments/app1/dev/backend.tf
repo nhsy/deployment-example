@@ -1,3 +1,4 @@
+/*
 terraform {
   backend "gcs" {
     bucket  = "gcp-clearify-terraform"
@@ -5,3 +6,4 @@ terraform {
     project = "gcp-foundation-shared-devops"
   }
 }
+*/
