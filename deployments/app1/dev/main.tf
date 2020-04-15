@@ -1,18 +1,29 @@
-resource "google_compute_instance" "backend" {
-  name         = "my-frontend-instance"
-  machine_type = "n1-standard-1"
-  zone         = "us-west1-a"
-  project      = var.project
+resource "google_compute_instance" "default" {
+  name         = "gce-instance"
+  machine_type = "g1-small"
+  zone         = var.zone
 
   tags = ["backend"]
 
+  can_ip_forward = true
+
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "projects/debian-cloud/global/images/debian-9"
     }
   }
 
   network_interface {
-    //subnetwork = data.terraform_remote_state.networking-dev.app_subnet
+    subnetwork = data.google_compute_subnetwork.default.self_link
+
+    access_config {
+      // REQUIRED TO ALLOW SSH
+    }
   }
+  project = var.project
+}
+
+data "google_compute_subnetwork" "default" {
+  name   = "default"
+  region = var.region
 }

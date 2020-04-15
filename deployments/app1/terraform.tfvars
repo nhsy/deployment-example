@@ -1,1 +1,1 @@
-project = "nhsy-0002"
+# terraform.tfvars

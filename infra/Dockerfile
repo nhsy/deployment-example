@@ -5,7 +5,8 @@ RUN apk --no-cache add \
  curl \
  which \
  bash \
- git
+ git \
+ jq
 
 RUN curl -sSL https://sdk.cloud.google.com | bash
 

@@ -1,22 +1,29 @@
 ---
 steps:
-- name: gcr.io/nhsy-0002/terraform-validator:latest
+- name: gcr.io/nhsy-0002/gcp-devops:latest
+  id: tf-init
+  entrypoint: terraform
   dir: deployments/app1/dev
   args:
   - init
-- name: gcr.io/nhsy-0002/terraform-validator:latest
+- name: gcr.io/nhsy-0002/gcp-devops:latest
+  id: tf-plan
+  entrypoint: terraform
+  env: ["TF_VAR_project=${_PROJECT}"]
   dir: deployments/app1/dev
   args:
   - plan
   - -out=terraform.tfplan
-- name: gcr.io/nhsy-0002/terraform-validator:latest
+- name: gcr.io/nhsy-0002/gcp-devops:latest
+  id: tf-convert
+  entrypoint: sh
   dir: deployments/app1/dev
-  args:
-  - convert
-  - terraform.tfplan
-- name: gcr.io/nhsy-0002/terraform-validator:latest
+  args: ['-c', 'terraform show -json terraform.tfplan > terraform.tfplan.json']
+- name: gcr.io/nhsy-0002/gcp-devops:latest
+  id: tf-validator
+  entrypoint: terraform-validator
   dir: deployments/app1/dev
   args:
   - validate
-  - terraform.tfplan
-  -  --policy-path=../../../policy-library/
+  - terraform.tfplan.json
+  - --policy-path=../../../policy-library/

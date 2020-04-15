@@ -1,3 +1,3 @@
 output "app_subnet" {
-    value = "${module.vpc.subnets_self_links[0]}"
+  value = "${module.vpc.subnets_self_links[0]}"
 }

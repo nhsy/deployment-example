@@ -1,10 +1,12 @@
 ---
 steps:
-- name: hashicorp/terraform
+- name: gcr.io/nhsy-0002/terraform-validator:latest
+  entrypoint: terraform
   dir: deployments/${_DEPLOYMENT}/${_ENV_NAME}
   args:
   - init
-- name: hashicorp/terraform
+- name: gcr.io/nhsy-0002/terraform-validator:latest
+entrypoint: terraform
   dir: deployments/${_DEPLOYMENT}/${_ENV_NAME}
   args:
   - apply
